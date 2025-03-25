@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Son Topish O'yini</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 60%;
+            margin-top: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .too-high {
+            color: red;
+        }
+
+        .too-low {
+            color: blue;
+        }
+
+        .hack-message {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .restart-btn {
+            background-color: #f44336;
+            margin-top: 20px;
+        }
+
+        .restart-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Son Topish O'yini</h1>
+        <p>1 dan 100 gacha bo'lgan bir sonni toping.</p>
+        <input type="text" id="userInput" placeholder="Sonni kiriting">
+        <button onclick="checkGuess()">Tekshirish</button>
+        <p class="message" id="message"></p>
+        <p>Urinishlar soni: <span id="attempts">0</span></p>
+        <button class="restart-btn" onclick="restartGame()">Qayta boshlash</button>
+    </div>
+
+    <script>
+        let secretNumber;
+        let attempts;
+
+        // O'yin boshlanishi
+        function startGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1; // 1 dan 100 gacha bo'lgan tasodifiy son
+            attempts = 0;
+            document.getElementById("attempts").textContent = attempts; // Urinishlar sonini yangilash
+            document.getElementById("message").textContent = ""; // Xabarni tozalash
+            document.getElementById("userInput").value = ""; // Inputni tozalash
+        }
+
+        // Foydalanuvchi sonni tekshirish
+        function checkGuess() {
+            const userInput = document.getElementById("userInput").value;
+            const message = document.getElementById("message");
+
+            // "hack" deb yozsa, to'g'ri javobni ko'rsatish
+            if (userInput.toLowerCase() === "hack") {
+                message.textContent = `To'g'ri javob: ${secretNumber}`;
+                message.className = "message correct";
+                return;
+            }
+
+            const guessedNumber = parseInt(userInput);
+            attempts++; // Har bir urinishni sanash
+            document.getElementById("attempts").textContent = attempts; // Urinishlar sonini yangilash
