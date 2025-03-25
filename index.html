@@ -121,3 +121,36 @@
             const guessedNumber = parseInt(userInput);
             attempts++; // Har bir urinishni sanash
             document.getElementById("attempts").textContent = attempts; // Urinishlar sonini yangilash
+
+
+            // Foydalanuvchi sonni to'g'ri kiritgan bo'lsa
+            if (guessedNumber === secretNumber) {
+                message.textContent = "Tabriklayman! Siz to'g'ri javobni topdingiz!";
+                message.className = "message correct";
+            }
+            // Agar foydalanuvchi kiritgan son katta bo'lsa
+            else if (guessedNumber > secretNumber) {
+                message.textContent = "Siz kiritgan son juda katta. Iltimos, kichikroq bir son kiriting.";
+                message.className = "message too-high";
+            }
+            // Agar foydalanuvchi kiritgan son kichik bo'lsa
+            else if (guessedNumber < secretNumber) {
+                message.textContent = "Siz kiritgan son juda kichik. Iltimos, kattaroq bir son kiriting.";
+                message.className = "message too-low";
+            } else {
+                message.textContent = "Iltimos, haqiqiy son kiriting.";
+                message.className = "message";
+            }
+        }
+
+        // O'yinni qayta boshlash
+        function restartGame() {
+            startGame(); // Yangi o'yin boshlash
+        }
+
+        // O'yinni boshlash
+        startGame();
+    </script>
+
+</body>
+</html>
